@@ -34,6 +34,8 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
 
+    console.log("POST Request Received");
+
   // Parse the request body from the POST
   let body = req.body;
 
@@ -101,6 +103,8 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
+
+  console.log("Message received; handling message");
   
   // Checks if the message contains text
   if (received_message.text) {    
@@ -167,6 +171,8 @@ function callSendAPI(sender_psid, response) {
     },
     "message": response
   }
+
+  console.log("Trying to send message");
 
   // Send the HTTP request to the Messenger Platform
   request({
