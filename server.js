@@ -115,7 +115,7 @@ function handleMessage(sender_psid, received_message) {
     // Get the URL of the message attachment
     const attachment_url = received_message.attachments[0].payload.url;
     const extension = attachment_url.split(/\#|\?/)[0].split('.').pop().trim();
-    if(extension == 'jpg' || extension == 'jpeg' || extension == 'png'){
+    if(extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'gif'){
         response = {
         "attachment": {
             "type": "template",
