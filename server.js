@@ -113,19 +113,26 @@ function handleMessage(sender_psid, received_message) {
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "TODO",
-            "subtitle": "Use AI to determine if the picture received is funny.",
-            "image_url": attachment_url,
-          }]
+    const attachment_url = received_message.attachments[0].payload.url;
+    const extension = attachment_url.split(/\#|\?/)[0].split('.').pop().trim();
+    if(extension == 'jpg' || extension == 'jpeg' || extension == 'png'){
+        response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+            "template_type": "generic",
+            "elements": [{
+                "title": "TODO",
+                "subtitle": "Use AI to determine if the picture received is funny.",
+                "image_url": attachment_url,
+            }]
+            }
         }
-      }
+        }
+    } else{
+        response = {
+            "text": "That doesn't look like a picture file to me."
+        }
     }
   } 
   
