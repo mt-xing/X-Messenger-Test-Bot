@@ -109,21 +109,9 @@ function handleMessage(sender_psid, received_message) {
 		// Create the payload for a basic text message, which
 		// will be added to the body of our request to the Send API
 		if(received_message.text == "Mass Destruction"){
-			callSendAPI(sender_psid, {
-				"attachment": {
-					"type": "template",
-					"payload": {
-						"template_type": "generic",
-						"elements": [{
-							"image_url": "https://images-na.ssl-images-amazon.com/images/I/618hk%2BBJ6%2BL._SY355_.jpg",
-						}]
-					}
-				}
-			});
-			
 			response = {
 				"text": "https://www.youtube.com/watch?v=6jFaoLrLzd4"
-			};
+			}
 		} else{
 			response = {
 				"text": `You said: "${received_message.text}".`
