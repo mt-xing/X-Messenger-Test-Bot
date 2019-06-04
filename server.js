@@ -108,8 +108,14 @@ function handleMessage(sender_psid, received_message) {
 	if (received_message.text) {
 		// Create the payload for a basic text message, which
 		// will be added to the body of our request to the Send API
-		response = {
-			"text": `You said: "${received_message.text}".`
+		if(received_message.text == "Mass Destruction"){
+			response = {
+				"text": "https://www.youtube.com/watch?v=6jFaoLrLzd4"
+			}
+		} else{
+			response = {
+				"text": `You said: "${received_message.text}".`
+			}
 		}
 	} else if (received_message.attachments) {
 		// Get the URL of the message attachment
