@@ -58,7 +58,7 @@ app.post('/webhook', (req, res) => {
 			if (webhook_event.message) {
 				handleMessage(sender_psid, webhook_event.message);
 			} else if (webhook_event.postback) {
-				handlePostback(sender_psid, webhook_event.postback);
+				callSendAPI(sender_psid, {"text":"You suck"});
 			}
 
 		});
@@ -169,10 +169,6 @@ function handleMessage(sender_psid, received_message) {
 
 	// Send the response message
 	callSendAPI(sender_psid, response);
-}
-
-function handlePostback(sender_psid, _ignore) {
-	callSendAPI(sender_psid, {"text":"You suck"});
 }
 
 function callSendAPI(sender_psid, response) {
