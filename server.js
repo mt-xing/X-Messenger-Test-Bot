@@ -58,7 +58,6 @@ app.post('/webhook', (req, res) => {
 			if (webhook_event.message) {
 				handleMessage(sender_psid, webhook_event.message);
 			} else if (webhook_event.postback) {
-
 				handlePostback(sender_psid, webhook_event.postback);
 			}
 
@@ -110,8 +109,34 @@ function handleMessage(sender_psid, received_message) {
 		// will be added to the body of our request to the Send API
 		if(received_message.text == "Mass Destruction"){
 			response = {
-				"text": "https://www.youtube.com/watch?v=6jFaoLrLzd4"
-			}
+				"attachment": {
+					"type": "template",
+					"payload": {
+						"template_type": "generic",
+						"elements": [{
+							"title": "BABYBABYBABYBABYBABYBABYBABYBABYBABY",
+							"subtitle": "BABYBABYBABYBABYBABYBABYBABYBABYBABY",
+							"image_url": "https://www.atlus.com/persona3/images/1.jpg",
+							"default_action": {
+								"type": "web_url",
+								"url": "https://www.youtube.com/watch?v=6jFaoLrLzd4",
+								"webview_height_ratio": "tall",
+							},
+							"buttons":[
+								{
+									"type":"web_url",
+									"url":"https://www.youtube.com/watch?v=6jFaoLrLzd4",
+									"title":"Go"
+								},{
+									"type":"postback",
+									"title":"No",
+									"payload":"DEVELOPER_DEFINED_PAYLOAD"
+								}
+							]
+						}]
+					}
+				}
+			};
 		} else{
 			response = {
 				"text": `You said: "${received_message.text}".`
@@ -144,6 +169,10 @@ function handleMessage(sender_psid, received_message) {
 
 	// Send the response message
 	callSendAPI(sender_psid, response);
+}
+
+function handlePostback(sender_psid, _ignore) {
+	callSendAPI(sender_psid, {"text":"You suck"});
 }
 
 function callSendAPI(sender_psid, response) {
